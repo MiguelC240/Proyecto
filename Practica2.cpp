@@ -22,8 +22,8 @@ void MotorE_Coronaria();
 
 
 
-char nombre[50], dia_familia, FV;
-string genero, AF, medicamentos, azucar, d1, d2, d3, d4, c1, c2, c3, c4;
+char nombre[50];
+string dia_familia, FV, genero, AF, medicamentos, azucar, d1, d2, d3, d4, c1, c2, c3, c4;
 int edad, puntaje_Diabetes = 0,  perimetro_ombli, d5, puntaje_Apnea = 0, puntaje_Coronaria = 0;
 float IMC, altura_m, altura, peso_actual;
 
@@ -117,6 +117,9 @@ void Datos_E()
 	/////////////// CLASIFICACION DEL IMC //////////////////////
 	
 	cout <<"\n\n CLASIFICACION DEL IMC";
+	
+	cout <<"\n\n Tu IMC es: "<<IMC;
+	
 	if (IMC < 18.5)
 	{
 		cout <<"\n\n"<<nombre<<" te encuentras bajo de peso";
@@ -190,25 +193,26 @@ void MotorE_Diabetes()
 		puntaje_Diabetes = puntaje_Diabetes + 4;
 	}
 	
+	cout <<"\n\n1. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	
-	switch(dia_familia)
+	
+	if(dia_familia == "A")
 	{
-		case 'A': puntaje_Diabetes = puntaje_Diabetes + 0;
-				  break; 
-				  
-		case 'B': puntaje_Diabetes = puntaje_Diabetes + 3;
-				  break; 
-				  
-		case 'C': puntaje_Diabetes = puntaje_Diabetes + 5;
-				  break; 
-				  
-		default: 
-				puntaje_Diabetes = puntaje_Diabetes + 0;
-				break;
+		puntaje_Diabetes = puntaje_Diabetes + 0;
+	}
+	if(dia_familia == "B")
+	{
+		puntaje_Diabetes = puntaje_Diabetes + 3;
+	}
+	if(dia_familia == "C")
+	{
+		puntaje_Diabetes = puntaje_Diabetes + 5;
 	}
 	
 
+	
+	cout <<"\n\n2. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	if(genero == "Masculino" && perimetro_ombli < 94)
 	{
@@ -228,16 +232,16 @@ void MotorE_Diabetes()
 	{
 			puntaje_Diabetes = puntaje_Diabetes + 0;
 	}
-	else if (perimetro_ombli >=80 && perimetro_ombli <= 88)
+	else if (genero == "Femenino" && perimetro_ombli >=80 && perimetro_ombli <= 88)
 	{
 		puntaje_Diabetes = puntaje_Diabetes + 3;
 	}
-	else if (perimetro_ombli > 88)
+	else if (genero == "Femenino" && perimetro_ombli > 88)
 	{
 		puntaje_Diabetes = puntaje_Diabetes + 4;
 	}
 	
-	
+	cout <<"\n\n3. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	if (AF == "Si")
 	{
@@ -247,21 +251,19 @@ void MotorE_Diabetes()
 	{
 		puntaje_Diabetes = puntaje_Diabetes + 2;
 	}
+	cout <<"\n\n4. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	
-	switch(FV)
+	if (FV == "A")
 	{
-		case 'A': puntaje_Diabetes = puntaje_Diabetes + 0;
-				  break; 
-				  
-		case 'B': puntaje_Diabetes = puntaje_Diabetes + 1;
-				  break; 
-				  
-		default: 
-				puntaje_Diabetes = puntaje_Diabetes + 0;
-				break;
+		puntaje_Diabetes = puntaje_Diabetes + 0;
+	}
+	if (FV == "B")
+	{
+		puntaje_Diabetes = puntaje_Diabetes + 1;
 	}
 	
+	cout <<"\n\n5. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	if (medicamentos == "No")
 	{
@@ -271,7 +273,7 @@ void MotorE_Diabetes()
 	{
 			puntaje_Diabetes = puntaje_Diabetes + 2;
 	}
-	
+	cout <<"\n\n6. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	if (azucar == "No")
 	{
@@ -281,7 +283,7 @@ void MotorE_Diabetes()
 	{
 			puntaje_Diabetes = puntaje_Diabetes + 5;
 	}
-	
+	cout <<"\n\n7. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	if (IMC < 25)
 	{
@@ -295,7 +297,7 @@ void MotorE_Diabetes()
 	{
 		puntaje_Diabetes = puntaje_Diabetes + 3;
 	}
-	
+	cout <<"\n\n8. Tu puntaje total fue: "<<puntaje_Diabetes;
 	
 	cout <<"\n\nTu puntaje total fue: "<<puntaje_Diabetes;
 
@@ -484,26 +486,22 @@ void MotorE_Coronaria()
 	}
 	else if (genero == "Masculino" && edad >= 50 && edad <= 59)
 	{
-		puntaje_Coronaria = puntaje_Coronaria + 1;
+		puntaje_Coronaria = puntaje_Coronaria + 2;
 	}
 	else if (genero == "Masculino" && edad > 60)
 	{
 		puntaje_Coronaria = puntaje_Coronaria + 3;
 	}
 	
-	if (genero == "Femenino" && edad < 45)
+	if (genero == "Femenino" && edad < 50)
 	{
 		puntaje_Coronaria = puntaje_Coronaria + 0;
 	}
-	else if (genero == "Femenino" && edad >= 45 && edad <= 49)
+	else if (genero == "Femenino" && edad >= 50 && edad <= 55)
 	{
 		puntaje_Coronaria = puntaje_Coronaria + 1;
 	}
-	else if (genero == "Femenino" && edad >= 50 && edad <= 59)
-	{
-		puntaje_Coronaria = puntaje_Coronaria + 2;
-	}
-	else if (genero == "Femenino" && edad > 60)
+	else if (genero == "Femenino" && edad > 55)
 	{
 		puntaje_Coronaria = puntaje_Coronaria + 3;
 	}
